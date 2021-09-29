@@ -23,4 +23,7 @@ export class ProductService {
   updateProduct(product: any): Observable<any>{
     return this.http.put(this.myAppUrl+this.myAppiURL+"Update", product);
   }
+  searchProduct(id: number): Observable<any>{
+    return this.http.get(this.myAppUrl+this.myAppiURL+"Get/"+id);
+  }
 }

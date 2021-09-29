@@ -55,15 +55,28 @@
       <div class="card">
         <div class="card-body">
           <h5 class="titulo">LISTADO DE PRODUCTOS</h5>
-          <table class="table">
-            <tbody>
-              <tr style="font-weight: bold;">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search..."
+                [(ngModel)]="idProduct">
+                <i (click)="searchProduct()" class="fas fa-search"></i>
+              </div>
+            </div>
+          </div>
+          <table class="table table-stripped">
+            <thead>
+              <tr>
+                <td>ID</td>
                 <td>Nombre</td>
                 <td>Precio</td>
                 <td>Stock</td>
                 <td>Fecha de registro</td>
               </tr>
-              <tr *ngFor="let product of listProducts; let i = index">
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of listProducts; let i = index ">
+                <td>{{product.id}}</td>
                 <td>{{product.name}}</td>
                 <td>{{product.price}}</td>
                 <td>{{product.stock}}</td>

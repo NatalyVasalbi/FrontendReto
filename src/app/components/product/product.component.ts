@@ -16,6 +16,7 @@ export class ProductComponent implements OnInit {
   accion = 'Agregar';
   form: FormGroup;
   id: number | undefined;
+  idProduct: number;
   constructor(private fb: FormBuilder,
     private toastr: ToastrService,
     private _productService: ProductService) {
@@ -93,5 +94,22 @@ export class ProductComponent implements OnInit {
       stock: product.stock,
       registrationDate: product.registrationDate
     })
+  }
+  searchProduct(){
+    if(this.idProduct){
+      this._productService.searchProduct(this.idProduct).subscribe(data => {
+        if(data){
+          this.listProducts=[];
+        this.listProducts.push(data);
+        }else{
+          this.toastr.error('No se encontró el producto!', 'Mensaje!');
+        }
+      },error =>{
+        console.log(error);
+      })
+    }else{
+      this.getProducts();
+    }
+
   }
 }
