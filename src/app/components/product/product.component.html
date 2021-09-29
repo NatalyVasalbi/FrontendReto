@@ -1,0 +1,80 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="titulo">Productos</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="titulo">{{accion| uppercase}} PRODUCTO</h5>
+          <form [formGroup]="form" (ngSubmit)="saveProduct()">
+            <div class="input-group input-group-lg mb-4">
+              <input formControlName="name"
+              [class.green-border]="this.form.get('name')?.valid"
+              [class.red-border]="this.form.get('name')?.invalid && this.form.get('name')?.touched"
+              maxlength="100"
+              type="text" class="form-control" placeholder="Nombre" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group input-group-lg mb-4">
+              <input formControlName="price"
+              [class.green-border]="this.form.get('price')?.valid"
+              [class.red-border]="this.form.get('price')?.invalid && this.form.get('price')?.touched"
+              type="text" class="form-control" placeholder="Precio" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group input-group-lg mb-4">
+              <input formControlName="stock"
+              [class.green-border]="this.form.get('stock')?.valid"
+              [class.red-border]="this.form.get('stock')?.invalid && this.form.get('stock')?.touched"
+              type="text" class="form-control" placeholder="Stock" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="row">
+              <div class="col lg-7">
+                <div class="input-group input-group-lg mb-3">
+                  <span class="input-group-text">
+                    <i class="fas fa-calendar-alt"></i>
+                  </span>
+                  <input formControlName="registrationDate" type="text" class="form-control" placeholder="YYYY-MM-DD" aria-describedby="basic-addon1">
+                </div>
+              </div>
+            </div>
+            <div class="d-grid gap-2">
+              <button [disabled]="this.form.invalid" class="btn btn-success btn-lg" type="submit">Aceptar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="titulo">LISTADO DE PRODUCTOS</h5>
+          <table class="table">
+            <tbody>
+              <tr style="font-weight: bold;">
+                <td>Nombre</td>
+                <td>Precio</td>
+                <td>Stock</td>
+                <td>Fecha de registro</td>
+              </tr>
+              <tr *ngFor="let product of listProducts; let i = index">
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.stock}}</td>
+                <td>{{product.registrationDate}}</td>
+                <td><i (click)="editProduct(product)" class="far fa-edit text-info"></i></td>
+                <td><i (click)="deleteProduct(product.id)" class="far fa-trash-alt text-danger"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
